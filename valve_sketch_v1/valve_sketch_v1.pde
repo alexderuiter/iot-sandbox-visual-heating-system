@@ -34,6 +34,8 @@ void draw() {
   }
   
   countTurnedOnValves();
+  println(frameRate);
+  
 }
 
 void mousePressed() {
@@ -44,11 +46,11 @@ void mousePressed() {
   }
 }
 
-int countTurnedOnValves () {
+void countTurnedOnValves () {
+  amountTurnedOn =0;
   for (int i = 0; i < valves.length; i++) {
     if (valves[i].turnedOn) {
       amountTurnedOn++;
     }
   }
-  return amountTurnedOn;
 }

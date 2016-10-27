@@ -7,6 +7,10 @@ void setup() {
 }
 
 void loop() {
+  while (Serial.available()) {
+    val = Serial.read();
+  }
+  
   for (int i = 0; i < lepPinsArrayLegnth; i++) {
     analogWrite(ledPins[i], 200);
   }
