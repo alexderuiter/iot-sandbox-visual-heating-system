@@ -3,8 +3,6 @@ class Valve {
   // valve part
   float brightness = 0;
   float maxBrightness = 50;
-  float pulse = 0;
-  float basePulse = 5;
   boolean turnedOn = false;
   long onTime = 0;
 
@@ -32,12 +30,6 @@ class Valve {
       turnedOn = true;
     } else if (turnedOn) {
       turnedOn = false;
-    }
-  }
-
-  void determinePulse (int amountTurnedOn) {
-    if (turnedOn) {
-      pulse = basePulse * amountTurnedOn;
     }
   }
 
