@@ -3,6 +3,7 @@ int ledPins[lepPinsArrayLegnth] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 float ledBrightness[lepPinsArrayLegnth];
 
 void setup() {
+  Serial.begin(9600);
 }
 
 void loop() {

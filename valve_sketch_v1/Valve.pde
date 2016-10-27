@@ -1,10 +1,13 @@
 class Valve {
 
   // valve part
-  float brightness = 0;
-  float maxBrightness = 50;
+  float currentBrightness = 0;
+  float maxBrightness = 255;
+  float maxCurrentBrightness; 
   boolean turnedOn = false;
+  boolean cooledDown = false;
   long onTime = 0;
+  
 
   // button part
   float buttonXPos, buttonYPos;     // Position of square button
@@ -35,17 +38,25 @@ class Valve {
 
   void checkTimer () {
     if (turnedOn) {
-      onTime++;
+      //onTime++;
       } else {
-      onTime = 0;
+      //onTime = 0;
       }
   }
 
   void determineBrightness () {
     if (turnedOn) {
-      if (brightness < maxBrightness) {
-        brightness =+ onTime;
+      if (maxCurrentBrightness < maxBrightness) {
+        maxCurrentBrightness++;  
       }
+      // this uses framerate to make it adaptable to different framerates
+      //for (int i = 0; i < 360; i += (amountTurnedOn * frameRate)) { 
+        float period = 4 - ((float)amountTurnedOn/(valves.length*2));
+        currentBrightness = (sin((float)onTime/frameRate/(period*TWO_PI))+1)/2 * maxCurrentBrightness;  
+      //}
+      //cooledDown = false;
+    } else if (!turnedOn && maxCurrentBrightness > 0){
+      maxCurrentBrightness--;
     }
   }
 
