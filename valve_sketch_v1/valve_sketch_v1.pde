@@ -1,3 +1,7 @@
+import processing.serial.*;
+
+Serial myPort;  // Create object from Serial class
+
 Valve[] valves;
 int amountTurnedOn; 
 
@@ -12,6 +16,9 @@ void setup() {
     }
     println(valves[i].buttonXPos, valves[i].buttonYPos);
   }
+  
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600);
 }
 
 
@@ -23,7 +30,7 @@ void draw() {
     valves[i].display();
     valves[i].checkTimer();
     valves[i].determineBrightness();
-    println("onTime of valve " + i + " = " + valves[i].onTime);
+    println("currentBrightness of valve " + i + " = " + valves[i].currentBrightness + "\t" + "maxCurrentBrightness of valve " + valves[i].maxCurrentBrightness);
   }
   
   countTurnedOnValves();
