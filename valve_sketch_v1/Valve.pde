@@ -6,7 +6,8 @@ class Valve {
   float maxCurrentBrightness; 
   boolean turnedOn = false;
   boolean cooledDown = false;
-  long onTime = 0;
+  //long onTime = 0;
+  int periodTime = 8;
   
 
   // button part
@@ -51,13 +52,15 @@ class Valve {
       }
       // this uses framerate to make it adaptable to different framerates
       //for (int i = 0; i < 360; i += (amountTurnedOn * frameRate)) { 
-        float period = 4 - ((float)amountTurnedOn/(valves.length*2));
-        currentBrightness = (sin((float)onTime/frameRate/(period*TWO_PI))+1)/2 * maxCurrentBrightness;  
+        //float period = 4 - ((float)amountTurnedOn/(valves.length*2));
+        //currentBrightness = (sin((float)onTime/frameRate/(period*TWO_PI))+1)/2 * maxCurrentBrightness;  
       //}
       //cooledDown = false;
     } else if (!turnedOn && maxCurrentBrightness > 0){
       maxCurrentBrightness--;
     }
+    float period = periodTime - ((float)amountTurnedOn/(valves.length*(periodTime/2)));
+    currentBrightness = (sin((float)frameCount/frameRate/period*TWO_PI)+1)/2 * maxCurrentBrightness;
   }
 
   void checkHovering(int xMouse, int yMouse) {
