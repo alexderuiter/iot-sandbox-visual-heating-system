@@ -41,6 +41,14 @@ class Valve {
     }
   }
 
+  void checkTimer () {
+    if (turnedOn) {
+      onTime++;
+      } else {
+      onTime = 0;
+      }
+  }
+
   void determineBrightness () {
     if (turnedOn) {
       if (brightness < maxBrightness) {

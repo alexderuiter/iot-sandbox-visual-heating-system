@@ -20,6 +20,9 @@ void draw() {
   for (int i = 0; i < valves.length; i++) {
     valves[i].checkHovering(mouseX, mouseY);
     valves[i].display();
+    valves[i].checkTimer();
+    valves[i].determineBrightness();
+    println("onTime of valve " + i + " = " + valves[i].onTime);
   }
 }
 
