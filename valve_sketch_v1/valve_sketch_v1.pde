@@ -17,7 +17,7 @@ void setup() {
     println(valves[i].buttonXPos, valves[i].buttonYPos);
   }
   
-  String portName = Serial.list()[0];
+  String portName = Serial.list()[3];
   myPort = new Serial(this, portName, 9600);
 }
 
@@ -31,10 +31,18 @@ void draw() {
     valves[i].checkTimer();
     valves[i].determineBrightness();
     println("currentBrightness of valve " + i + " = " + valves[i].currentBrightness + "\t" + "maxCurrentBrightness of valve " + valves[i].maxCurrentBrightness);
-  }
+    
+    //myPort.write("A*");
+    //myPort.write((byte)i);
+    //myPort.write('$');
+    //myPort.write("B*");
+    //myPort.write((byte)valves[i].currentBrightness);
+    //myPort.write('$');
+}
   
   countTurnedOnValves();
   println(frameRate);
+  
   
 }
 
