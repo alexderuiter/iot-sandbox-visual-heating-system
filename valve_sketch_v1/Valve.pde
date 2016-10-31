@@ -59,8 +59,9 @@ class Valve {
     } else if (!turnedOn && maxCurrentBrightness > 0){
       maxCurrentBrightness--;
     }
-    float period = periodTime - ((float)amountTurnedOn/(valves.length*(periodTime/2)));
-    currentBrightness = (sin((float)frameCount/frameRate/period*TWO_PI)+1)/2 * maxCurrentBrightness;
+    float period = periodTime - ((float)amountTurnedOn/valves.length)*periodTime/2;
+    println(period);
+    currentBrightness = (sin((float)frameCount/maxFrameRate/period*TWO_PI)+1)/2 * maxCurrentBrightness;
   }
 
   void checkHovering(int xMouse, int yMouse) {

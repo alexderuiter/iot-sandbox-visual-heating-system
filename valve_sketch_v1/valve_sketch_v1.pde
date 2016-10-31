@@ -4,9 +4,13 @@ Serial myPort;  // Create object from Serial class
 
 Valve[] valves;
 int amountTurnedOn; 
+int maxFrameRate = 60;
 
 void setup() {
   size(430, 720);
+  frameRate(maxFrameRate);
+  
+  // innitiates 12 valve objects
   valves = new Valve[12];
   for (int i = 0; i < valves.length; i++) {
     if (i < valves.length/2) {
@@ -18,9 +22,8 @@ void setup() {
   }
   
   String portName = Serial.list()[3];
-  myPort = new Serial(this, portName, 9600);
+  myPort = new Serial(this, portName, 250000);
 }
-
 
 void draw() {
   background(122);
@@ -30,18 +33,17 @@ void draw() {
     valves[i].display();
     valves[i].checkTimer();
     valves[i].determineBrightness();
-    println("currentBrightness of valve " + i + " = " + valves[i].currentBrightness + "\t" + "maxCurrentBrightness of valve " + valves[i].maxCurrentBrightness);
+    //println("currentBrightness of valve " + i + " = " + valves[i].currentBrightness + "\t" + "maxCurrentBrightness of valve " + valves[i].maxCurrentBrightness);
+    myPort.write("A");
+    myPort.write((byte)i);
+    myPort.write('$');
+    myPort.write((byte)valves[i].currentBrightness);
+    myPort.write('\n');
     
-    //myPort.write("A*");
-    //myPort.write((byte)i);
-    //myPort.write('$');
-    //myPort.write("B*");
-    //myPort.write((byte)valves[i].currentBrightness);
-    //myPort.write('$');
 }
   
   countTurnedOnValves();
-  println(frameRate);
+  if (frameRate < 30) println(frameRate);
   
   
 }
