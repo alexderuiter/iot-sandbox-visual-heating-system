@@ -42,10 +42,10 @@ class Valve {
         maxCurrentBrightness += 0.25;  
       }
     } else if (!turnedOn && maxCurrentBrightness > 0){
-      maxCurrentBrightness--;
+      maxCurrentBrightness -= 0.25;
     }
     float period = periodTime - ((float)amountTurnedOn/valves.length)*periodTime/2;
-    println(period);
+    //println(period);
     currentBrightness = (sin((float)frameCount/maxFrameRate/period*TWO_PI)+1)/2 * maxCurrentBrightness;
   }
 
