@@ -6,14 +6,12 @@ class Valve {
   float maxCurrentBrightness; 
   boolean turnedOn = false;
   boolean cooledDown = false;
-  //long onTime = 0;
-  int periodTime = 8;
+  int periodTime = 6;
   
 
   // button part
   float buttonXPos, buttonYPos;     // Position of square button
-  int buttonDiameter = 40;        // width as well as height of button
-  int maxButtonDiameter =  50;
+  int buttonDiameter = 80;        // width as well as height of button
   color buttonOnColor = 210;
   color buttonOffColor = 140;
   color buttonHoverColor = 70;
@@ -37,25 +35,12 @@ class Valve {
     }
   }
 
-  void checkTimer () {
-    if (turnedOn) {
-      //onTime++;
-      } else {
-      //onTime = 0;
-      }
-  }
 
   void determineBrightness () {
     if (turnedOn) {
       if (maxCurrentBrightness < maxBrightness) {
-        maxCurrentBrightness++;  
+        maxCurrentBrightness += 0.25;  
       }
-      // this uses framerate to make it adaptable to different framerates
-      //for (int i = 0; i < 360; i += (amountTurnedOn * frameRate)) { 
-        //float period = 4 - ((float)amountTurnedOn/(valves.length*2));
-        //currentBrightness = (sin((float)onTime/frameRate/(period*TWO_PI))+1)/2 * maxCurrentBrightness;  
-      //}
-      //cooledDown = false;
     } else if (!turnedOn && maxCurrentBrightness > 0){
       maxCurrentBrightness--;
     }
@@ -73,7 +58,7 @@ class Valve {
     }
   }
 
-  void display() {
+  void display(int valveNumber) {
     if (!buttonClicked) {
       fill(buttonOffColor);
     }
@@ -86,5 +71,10 @@ class Valve {
     noStroke();
     rectMode(CENTER);
     rect(buttonXPos, buttonYPos, buttonDiameter, buttonDiameter);
+    fill(255);
+    textMode(CENTER);
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    text(valveNumber, buttonXPos, buttonYPos);
   }
 } 

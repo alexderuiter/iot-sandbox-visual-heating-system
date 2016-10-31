@@ -30,8 +30,7 @@ void draw() {
 
   for (int i = 0; i < valves.length; i++) {
     valves[i].checkHovering(mouseX, mouseY);
-    valves[i].display();
-    valves[i].checkTimer();
+    valves[i].display(i);
     valves[i].determineBrightness();
     //println("currentBrightness of valve " + i + " = " + valves[i].currentBrightness + "\t" + "maxCurrentBrightness of valve " + valves[i].maxCurrentBrightness);
     myPort.write("A");
